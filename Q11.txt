@@ -1,0 +1,72 @@
+-- UNNORMALIZED TABLE (0NF)
+EmpID | EmpName | DeptID | DeptName | Manager | Skills
+------|---------|--------|----------|---------|---------------
+1     | Aaku    | 10     | IT       | Smith   | Java, SQL
+2     | Aaru    | 20     | HR       | Alice   | Excel, Word
+3     | Alvu    | 10     | IT       | Smith   | Python, SQL
+
+PROBLEMS: Repeating groups (multiple skills), data redundancy
+
+
+-- FIRST NORMAL FORM (1NF)
+EmpID | EmpName | DeptID | DeptName | Manager | Skill
+------|---------|--------|----------|---------|--------
+1     | Aaku    | 10     | IT       | Smith   | Java
+1     | Aaku    | 10     | IT       | Smith   | SQL
+2     | Aaru    | 20     | HR       | Alice   | Excel
+2     | Aaru    | 20     | HR       | Alice   | Word
+3     | Alvu    | 10     | IT       | Smith   | Python
+3     | Alvu    | 10     | IT       | Smith   | SQL
+
+Primary Key: (EmpID, Skill)
+PROBLEMS: Partial dependencies (EmpName, DeptID depend only on EmpID)
+
+
+-- SECOND NORMAL FORM (2NF)
+
+-- Employee Table
+EmpID (PK) | EmpName | DeptID | DeptName | Manager
+-----------|---------|--------|----------|--------
+1          | Aaku    | 10     | IT       | Smith
+2          | Aaru    | 20     | HR       | Alice
+3          | Alvu    | 10     | IT       | Smith
+
+-- Employee_Skill Table  
+EmpID (PK, FK) | Skill (PK)
+---------------|----------
+1              | Java
+1              | SQL
+2              | Excel
+2              | Word
+3              | Python
+3              | SQL
+
+PROBLEMS: Transitive dependency (DeptName, Manager depend on DeptID)
+
+
+-- THIRD NORMAL FORM (3NF)
+
+-- Employee Table
+EmpID (PK) | EmpName | DeptID (FK)
+-----------|---------|------------
+1          | Aaku    | 10
+2          | Aaru    | 20
+3          | Alvu    | 10
+
+-- Department Table
+DeptID (PK) | DeptName | Manager
+------------|----------|--------
+10          | IT       | Smith
+20          | HR       | Alice
+
+-- Employee_Skill Table
+EmpID (PK, FK) | Skill (PK)
+---------------|----------
+1              | Java
+1              | SQL
+2              | Excel
+2              | Word
+3              | Python
+3              | SQL
+
+RESULT: All tables are now in 3NF and BCNF (no BCNF violations in this example)

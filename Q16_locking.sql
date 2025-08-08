@@ -1,0 +1,4 @@
+USE HospitalDB;
+
+START TRANSACTION;
+SELECT * FROM Bill WHERE bill_id = 1 FOR UPDATE;

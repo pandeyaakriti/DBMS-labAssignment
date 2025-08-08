@@ -1,0 +1,2 @@
+CREATE DATABASE HospitalDB;
+USE HospitalDB;
